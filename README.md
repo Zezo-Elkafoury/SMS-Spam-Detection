@@ -1,72 +1,112 @@
-# SMS Spam Detection
+# 📩 SMS Spam Detection
 
-This project aims to build a machine learning model to detect SMS spam messages. The project involves data loading, cleaning, exploratory data analysis (EDA), text preprocessing, and training a classification model.
+A machine learning project that classifies SMS messages as **spam** or **not spam**. The project covers data loading, cleaning, exploratory data analysis (EDA), text preprocessing, model building, and deployment using **Streamlit**.
 
-## Project Steps
+---
 
-1.  **Data Loading and Initial Exploration:**
-    *   Loaded the dataset (`spam.csv`) and performed initial checks on its structure and content using `df.head()`, `df.info()`, and `df.describe()`.
+## 🚀 Live Demo
 
-2.  **Data Cleaning:**
-    *   Removed irrelevant columns ('Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4').
-    *   Handled missing values (checked using `df.isnull().sum()`).
-    *   Removed duplicate entries (checked using `df.duplicated().sum()` and removed with `df.drop_duplicates()`).
-    *   Renamed columns for clarity ('v1' to 'type', 'v2' to 'text').
-    *   Encoded the target variable ('type') using `LabelEncoder`.
+Check out the live Streamlit app here:  
+👉 [**SMS Spam Classifier App**](https://your-username.streamlit.app)  
+> _Predict whether a message is spam in real-time!_
 
-3.  **Exploratory Data Analysis (EDA):**
-    *   Visualized the distribution of message types (spam vs. non-spam) using a pie plot.
-    *   Calculated and added new features:
-        *   `num_chars`: Number of characters in each message.
-        *   `num_words`: Number of words in each message (using `nltk.word_tokenize`).
-        *   `num_sentences`: Number of sentences in each message (using `nltk.sent_tokenize`).
-    *   Analyzed the descriptive statistics of these new features for both spam and non-spam messages.
-    *   Visualized the distribution of message lengths (characters and sentences) for spam and non-spam messages using histograms.
-    *   Explored correlations between the numerical features using a heatmap.
+---
 
-4.  **Data Preprocessing for Machine Learning:**
-    *   Created a `transform_text` function to preprocess the text data:
-        *   Convert text to lowercase.
-        *   Tokenize the text.
-        *   Remove non-alphanumeric characters.
-        *   Remove English stop words and punctuation.
-        *   Apply stemming using `PorterStemmer`.
-    *   Applied the `transform_text` function to the 'text' column to create a new 'final\_text' column.
-    *   Generated a word cloud for spam messages to visualize the most frequent words.
+## 📌 Project Overview
 
-5.  **Machine Learning Model Building:**
-    *   Transformed the 'final\_text' data into numerical features using `TfidfVectorizer` with `max_features=3000`.
-    *   Split the data into training and testing sets (`X_train`, `X_test`, `y_train`, `y_test`).
-    *   Trained a `RandomForestClassifier` model.
-    *   Evaluated the model's performance on the test set using:
-        *   Accuracy score
-        *   Precision score
-        *   Confusion matrix (visualized using a heatmap).
-    *   Performed 5-fold cross-validation to assess model generalization, reporting mean accuracy, precision, and recall.
+This project builds an end-to-end spam detection system using classical NLP and machine learning techniques.
 
-6.  **Model Saving:**
-    *   Saved the trained `RandomForestClassifier` model and the `TfidfVectorizer` to pickle files (`model.pkl` and `vectorizer.pkl`) for later use.
+---
 
-## Technologies Used
+## 🔧 Project Workflow
 
-*   Python
-*   Pandas
-*   NumPy
-*   Matplotlib
-*   Seaborn
-*   NLTK
-*   Scikit-learn
-*   WordCloud
+### 1. **Data Loading & Exploration**
+- Dataset: `spam.csv`
+- Initial inspection using `.head()`, `.info()`, `.describe()`
 
-## How to Run
+### 2. **Data Cleaning**
+- Removed irrelevant columns (`Unnamed: 2`, `Unnamed: 3`, `Unnamed: 4`)
+- Dropped missing values and duplicates
+- Renamed columns: `v1` ➝ `label`, `v2` ➝ `text`
+- Encoded labels: `ham` ➝ `0`, `spam` ➝ `1`
 
-1.  Ensure you have the necessary libraries installed (`pip install pandas numpy matplotlib seaborn nltk scikit-learn wordcloud`).
-2.  Download the `spam.csv` dataset.
-3.  Run the Python code in a Jupyter Notebook or Google Colab environment.
+### 3. **Exploratory Data Analysis (EDA)**
+- Class distribution pie chart (spam vs. non-spam)
+- New features added:
+  - `num_chars`: number of characters
+  - `num_words`: number of words
+  - `num_sentences`: number of sentences
+- Histograms to compare message lengths
+- Correlation heatmap of features
 
-## Files
+### 4. **Text Preprocessing**
+Custom function `transform_text()`:
+- Lowercasing
+- Tokenization (`nltk`)
+- Removing stopwords and punctuation
+- Stemming (`PorterStemmer`)
+- Applied to create a new `final_text` column
 
-*   `spam.csv`: The dataset containing SMS messages and their labels (spam/non-spam).
-*   `model.pkl`: The saved trained `RandomForestClassifier` model.
-*   `vectorizer.pkl`: The saved trained `TfidfVectorizer`.
-*   Notebook code: The Python code used for the project steps.
+> Also generated a word cloud to visualize frequent spam terms.
+
+### 5. **Model Building**
+- Text vectorization using `TfidfVectorizer` (`max_features=3000`)
+- Trained a `RandomForestClassifier`
+- Evaluation:
+  - Accuracy
+  - Precision
+  - Confusion Matrix
+- 5-Fold Cross Validation for robust metrics
+
+### 6. **Model Saving**
+- `model.pkl`: trained classifier
+- `vectorizer.pkl`: trained TF-IDF vectorizer (used in deployment)
+
+---
+
+## 🖥️ Web App Deployment (Streamlit)
+
+A Streamlit app was built to allow real-time prediction of spam messages.
+
+### 💡 Features
+- Paste or type any SMS/Email message
+- Click **Predict**
+- Get instant results: **Spam** or **Not Spam**
+
+### 🔗 Hosted App  
+👉 [**Open the Streamlit App**](https://sms-spam-detection-ziad-elkafoury.streamlit.app/)) 
+> _(replace with your actual deployed app URL)_
+
+---
+
+## 📁 Files in Repository
+
+| File/Folder       | Description                                      |
+|-------------------|--------------------------------------------------|
+| `app.py`          | Streamlit app source code                        |
+| `spam.csv`        | Dataset used for training                        |
+| `model.pkl`       | Saved trained classification model               |
+| `vectorizer.pkl`  | Saved trained TF-IDF vectorizer                  |
+| `requirements.txt`| Python dependencies for deployment               |
+| `notebook.ipynb`  | Jupyter notebook with full EDA and training code |
+
+---
+
+## 🛠️ Technologies Used
+
+- **Python**
+- **Pandas, NumPy** — data handling
+- **Matplotlib, Seaborn** — data visualization
+- **NLTK** — text preprocessing
+- **Scikit-learn** — machine learning
+- **WordCloud** — visualizing frequent words
+- **Streamlit** — app development & deployment
+
+---
+
+## ▶️ How to Run Locally
+
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/your-username/spam-classifier-app.git
+   cd spam-classifier-app
