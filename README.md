@@ -7,7 +7,7 @@ A machine learning project that classifies SMS messages as **spam** or **not spa
 ## 🚀 Live Demo
 
 Check out the live Streamlit app here:  
-👉 [**SMS Spam Classifier App**](https://your-username.streamlit.app)  
+👉 [**SMS Spam Classifier App**](https://sms-spam-detection-ziad-elkafoury.streamlit.app/) 
 > _Predict whether a message is spam in real-time!_
 
 ---
