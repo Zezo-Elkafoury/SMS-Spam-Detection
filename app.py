@@ -9,10 +9,6 @@ import nltk
 model = pickle.load(open('model.pkl', 'rb'))
 tfidf = pickle.load(open('vectorizer.pkl', 'rb'))
 
-# Ensure required NLTK data is available
-nltk.download('punkt')
-nltk.download('stopwords')
-
 # Preprocessing function
 ps = PorterStemmer()
 def transform_text(text):
